@@ -1,3 +1,4 @@
+
 /**
  * @file   Particle.cpp
  * @author xiaohai <xiaohaijin@outlook.com>
@@ -8,7 +9,30 @@
  */
 #include <iostream>
 #include <cmath>
+#include <string>
 using namespace std;
+
+
+namespace xiaohai
+{
+  class Exception
+  {
+  public:
+    Exception(const string theMessage="Some errors have happened.")
+      : message(theMessage){ }
+    virtual string What() const
+    {
+      return message;
+    }
+    virtual ~Exception(){ }
+
+  private:
+    string message;
+  };
+}
+
+
+
 namespace xiaohai
 {
   template <typename T>
@@ -19,7 +43,7 @@ namespace xiaohai
     friend istream& operator>>(istream &is, Track<U> &track);
     template <typename U>
     friend ostream& operator<<(ostream &os, Track<U> &track);
-    public:
+  public:
     /// constructor
     Track()
       :fId(0), fPx(0), fPy(0), fPz(0), fMass(0), fX(0), fY(0), fZ(0), fTime(0){ }
@@ -27,6 +51,7 @@ namespace xiaohai
       : fId(id), fPx(px), fPy(py), fPz(pz), fMass(mass), fX(x), fY(y), fZ(z), fTime(ftime)
     { }
     Track(const Track<T>& track);
+    virtual ~Track() { }
     Track& operator=(const Track<T>& track);
     /// get functions
     virtual int GetId() const;
@@ -260,14 +285,6 @@ namespace xiaohai
 
 
   
-  /**
-   * @file   Particle.cpp
-   * @author xiaohai <xiaohaijin@outlook.com>
-   * @date   Wed Jun  7 13:02:39 2017
-   * 
-   * @brief  The class is used to generate
-   *         a class.
-   */
   template <typename T>
   class Event
   {
@@ -563,7 +580,16 @@ namespace xiaohai
   template <typename T>
   inline Track<T> &Event<T>::GetTrack(int itrack) const
   {
-    return this->vectorTrack[itrack];
+    if(itrack < 0)
+      {
+	throw Exception("track number must be itrack >= 0 && itrack < multi");
+      }
+    else
+      {
+	return this->vectorTrack[itrack];
+      }
   }
 
+  
 }
+

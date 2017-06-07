@@ -24,6 +24,11 @@ int main(int argc, char *argv[])
   Event<double> *evt = new Event<double>;
   ifstream input("/home/xiaohai/Github/ampt/comment/ana/ampt.dat");
   input >> *evt;
-  cout << *evt;
+  try{
+    cout << evt->GetTrack(-1) << endl;
+  }
+  catch(Exception e){
+    cout << e.What() << endl;
+  }
   return 0;
 }
