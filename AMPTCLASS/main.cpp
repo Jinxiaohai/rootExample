@@ -20,7 +20,6 @@ using namespace xiaohai;
 
 int main(int argc, char *argv[])
 {
-  
   Event<double> *evt = new Event<double>;
   ifstream input("/home/xiaohai/Github/ampt/comment/ana/ampt.dat");
   input >> *evt;

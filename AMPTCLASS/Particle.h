@@ -15,6 +15,10 @@ using namespace std;
 
 namespace xiaohai
 {
+  /** 
+   * deal with the basic the errors.
+   * Created by xiaohai.
+   */
   class Exception
   {
   public:
@@ -35,6 +39,10 @@ namespace xiaohai
 
 namespace xiaohai
 {
+  /** 
+   * deal with the track infomation.
+   * Created by xiaohai.
+   */
   template <typename T>
   class Track
   {
@@ -284,7 +292,10 @@ namespace xiaohai
   } ///< template
 
 
-  
+  /** 
+   * deal with the event infomation.
+   * Created by xiaohai.
+   */
   template <typename T>
   class Event
   {
@@ -582,14 +593,12 @@ namespace xiaohai
   {
     if(itrack < 0)
       {
-	throw Exception("track number must be itrack >= 0 && itrack < multi");
+	throw Exception("track number must be itrack >= 0 && itrack < multi.");
       }
     else
       {
 	return this->vectorTrack[itrack];
       }
   }
-
   
 }
-
